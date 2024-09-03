@@ -1,0 +1,35 @@
+import gameOfThrone.*
+test "enemigos vencibles y moradas conquistables" {
+	dany.capacidad(3)
+	dany.encontrar(espada)
+	dany.encontrar(armadura)
+	dany.encontrar(collar)
+	
+	assert.equals(#{cersei, ayra}, westeros.enemigosVencibles(dany))
+	assert.equals(#{palacio, torre}, westeros.moradasConquistables(dany))
+}
+
+test "poderoso" {
+	dany.capacidad(3)
+	dany.encontrar(espada)
+	dany.encontrar(armadura)
+	dany.encontrar(collar)
+	
+	assert.notThat(westeros.poderoso(dany))
+	dany.poderBase(10)
+	assert.that(westeros.poderoso(dany))
+}
+
+test "artefacto fatal" {
+	dany.capacidad(3)
+	dany.encontrar(espada)
+	dany.encontrar(armadura)
+	dany.encontrar(collar)
+	dany.poderBase(15)
+	
+	assert.that(dany.tieneArmaFatal(ayra))
+	assert.equals(espada, dany.armaFatal(ayra))
+	
+	assert.notThat(dany.tieneArmaFatal(jonSnow))
+	assert.throwsException({dany.armaFatal(jonSnow)})
+}
