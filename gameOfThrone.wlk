@@ -28,7 +28,7 @@ object dany {
 	method tiene(artefacto) = self.posesiones().contains(artefacto)	
 }
 
+object libro {}
 object espada{}
 object collar {}
 object armadura {}
-object libro {}
